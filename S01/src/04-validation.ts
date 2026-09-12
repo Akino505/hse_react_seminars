@@ -30,5 +30,8 @@ export const defaultRules: Rules = {
 };
 
 export function validateForm(data: IFormData, rules: Rules): Errors {
-    throw new Error("не реализовано");
+    const errors: Errors = {};
+    for(const key in rules){
+        if(is)
+    }
 }

@@ -17,5 +17,9 @@ export type User = {
 };
 
 export function describeUser(user: User): string {
-    throw new Error("не реализовано");
+    const strAge = user.age !== undefined ? `${user.age} лет` : "Empty";
+    const strHobbies = user.hobbies.length !== 0 ? user.hobbies.join(", ") : "Empty";
+    const strContact = "email" in user.contact ? `Email: ${user.contact.email}` : `Phone: ${user.contact.phone}`;
+
+    return `Name: ${user.name},\nAge: ${strAge},\nHobbies: ${strHobbies},\nContact: ${strContact}`
 }

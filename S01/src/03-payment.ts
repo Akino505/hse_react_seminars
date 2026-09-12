@@ -11,10 +11,30 @@ export type Payment =
     | { kind: "cash"; amount: number }
     | { kind: "transfer"; iban: string };
 
+export function assertNever(value: never): never {
+    throw new Error("Необработанный вариант: " + JSON.stringify(value));
+}
+
 export function describePayment(payment: Payment): string {
-    throw new Error("не реализовано");
+    switch(payment.kind){
+        case "card":
+            return payment.last4;
+        case "cash":
+            return `${payment.amount}`;
+        case "transfer":
+            return payment.iban;
+        default:
+            return assertNever(payment);
+            
+    }
 }
 
 export function total(payments: Payment[]): number {
-    throw new Error("не реализовано");
+    let sum: number = 0;
+    for(const payment of payments){
+        if(payment.kind === "cash"){
+            sum += payment.amount;
+        }
+    }
+    return sum;
 }
