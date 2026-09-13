@@ -9,7 +9,8 @@
 export type Payment =
     | { kind: "card"; last4: string }
     | { kind: "cash"; amount: number }
-    | { kind: "transfer"; iban: string };
+    | { kind: "transfer"; iban: string }
+    | { kind: "trade"; product: string};
 
 export function assertNever(value: never): never {
     throw new Error("Необработанный вариант: " + JSON.stringify(value));
@@ -23,9 +24,10 @@ export function describePayment(payment: Payment): string {
             return `${payment.amount}`;
         case "transfer":
             return payment.iban;
+        case "trade":
+            return payment.product;
         default:
             return assertNever(payment);
-            
     }
 }
 
