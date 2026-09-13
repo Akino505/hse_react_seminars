@@ -29,9 +29,17 @@ export const defaultRules: Rules = {
     age: (value) => value > 0,
 };
 
-export function validateForm(data: IFormData, rules: Rules): Errors {
+export function validateForm(data: IFormData, rules: Rules): Errors{
     const errors: Errors = {};
-    for(const key in rules){
-        if(is)
+    if(!rules.username(data.username)){
+        errors.username = `Field  "username" is invalid`;
     }
+    if(!rules.email(data.email)){
+        errors.email = `Field  "email" is invalid`;
+    }
+    if(!rules.age(data.age)){
+        errors.age = `Field  "age" is invalid`;
+    }
+    return errors;
 }
+
